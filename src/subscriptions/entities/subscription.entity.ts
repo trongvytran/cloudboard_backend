@@ -1,18 +1,24 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Billboard } from 'src/billboards/entities/billboard.entity';
+import { Product } from 'src/products/entities/product.entity';
+import { User } from 'src/users/entities/user.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  ManyToOne,
+} from 'typeorm';
 
 @Entity()
 export class Subscription {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  user_id: string;
+  @ManyToOne(() => User, (user) => user.subscriptions)
+  user: User;
 
-  @Column()
-  product_id: string;
-
-  @Column()
-  trans_id: string;
+  @ManyToOne(() => Product, (product) => product.subscriptions)
+  product: Product;
 
   @Column()
   period_start: Date;
@@ -31,4 +37,7 @@ export class Subscription {
 
   @Column()
   status: boolean;
+
+  @OneToMany(() => Billboard, (billboard) => billboard.subscription)
+  billboards: Billboard[];
 }

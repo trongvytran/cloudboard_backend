@@ -4,6 +4,6 @@ import { WardsController } from './wards.controller';
 
 @Module({
   controllers: [WardsController],
-  providers: [WardsService]
+  providers: [WardsService],
 })
 export class WardsModule {}

@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Billboard } from 'src/billboards/entities/billboard.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class District {
@@ -7,4 +8,7 @@ export class District {
 
   @Column()
   name: string;
+
+  @OneToMany(() => Billboard, (billboard) => billboard.district)
+  billboards: Billboard[];
 }

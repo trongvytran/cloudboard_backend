@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Subscription } from 'src/subscriptions/entities/subscription.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class Product {
@@ -31,4 +32,7 @@ export class Product {
 
   @Column()
   modified_by: Date;
+
+  @OneToMany(() => Subscription, (subscription) => subscription.product)
+  subscriptions: Subscription[];
 }

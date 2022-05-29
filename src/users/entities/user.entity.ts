@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Billboard } from 'src/billboards/entities/billboard.entity';
+import { Subscription } from 'src/subscriptions/entities/subscription.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class User {
@@ -18,9 +20,6 @@ export class User {
   user_name: string;
 
   @Column()
-  password: string;
-
-  @Column()
   imageURL: string;
 
   @Column()
@@ -37,4 +36,10 @@ export class User {
 
   @Column()
   modified_by: Date;
+
+  @OneToMany(() => Billboard, (billboard) => billboard.user)
+  billboards: Billboard[];
+
+  @OneToMany(() => Subscription, (subscription) => subscription.user)
+  subscriptions: Subscription[];
 }

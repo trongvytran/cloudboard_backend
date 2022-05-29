@@ -1,24 +1,29 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { City } from 'src/cities/entities/city.entity';
+import { District } from 'src/districts/entities/district.entity';
+import { Subscription } from 'src/subscriptions/entities/subscription.entity';
+import { User } from 'src/users/entities/user.entity';
+import { Ward } from 'src/wards/entities/ward.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Billboard {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  user_id: string;
+  @ManyToOne(() => User, (user) => user.billboards)
+  user: User;
 
-  @Column()
-  city_id: string;
+  @ManyToOne(() => City, (city) => city.billboards)
+  city: City;
 
-  @Column()
-  district_id: string;
+  @ManyToOne(() => District, (distinct) => distinct.billboards)
+  district: District;
 
-  @Column()
-  ward_id: string;
+  @ManyToOne(() => Ward, (ward) => ward.billboards)
+  ward: Ward;
 
-  @Column()
-  subscription_id: string;
+  @ManyToOne(() => Subscription, (subscription) => subscription.billboards)
+  subscription: Subscription;
 
   @Column()
   lat: number;
