@@ -1,19 +1,19 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { CitiesController } from './cities.controller';
-import { CitiesService } from './cities.service';
-import { City } from './entities/city.entity';
+import { Role } from './entities/role.entity';
+import { RolesController } from './roles.controller';
+import { RolesService } from './roles.service';
 
-describe('CitiesController', () => {
-  let controller: CitiesController;
+describe('RolesController', () => {
+  let controller: RolesController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [CitiesController],
+      controllers: [RolesController],
       providers: [
-        CitiesService,
+        RolesService,
         {
-          provide: getRepositoryToken(City),
+          provide: getRepositoryToken(Role),
           useValue: {
             create: jest.fn(),
             save: jest.fn(),
@@ -23,7 +23,7 @@ describe('CitiesController', () => {
       ],
     }).compile();
 
-    controller = module.get<CitiesController>(CitiesController);
+    controller = module.get<RolesController>(RolesController);
   });
 
   it('should be defined', () => {

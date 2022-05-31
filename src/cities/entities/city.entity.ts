@@ -1,7 +1,15 @@
-import { Billboard } from 'src/billboards/entities/billboard.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Billboard } from '../../billboards/entities/billboard.entity';
+import { District } from '../../districts/entities/district.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  Unique,
+} from 'typeorm';
 
 @Entity()
+@Unique(['name'])
 export class City {
   @PrimaryGeneratedColumn()
   id: number;
@@ -11,4 +19,7 @@ export class City {
 
   @OneToMany(() => Billboard, (billboard) => billboard.city)
   billboards: Billboard[];
+
+  @OneToMany(() => District, (district) => district.city)
+  districts: District[];
 }

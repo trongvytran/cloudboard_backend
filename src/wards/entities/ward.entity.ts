@@ -1,5 +1,12 @@
-import { Billboard } from 'src/billboards/entities/billboard.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Billboard } from '../../billboards/entities/billboard.entity';
+import { District } from '../../districts/entities/district.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  ManyToOne,
+} from 'typeorm';
 
 @Entity()
 export class Ward {
@@ -11,4 +18,7 @@ export class Ward {
 
   @OneToMany(() => Billboard, (billboard) => billboard.ward)
   billboards: Billboard[];
+
+  @ManyToOne(() => District, (district) => district.wards)
+  district: District;
 }

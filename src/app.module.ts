@@ -9,10 +9,11 @@ import { TransactionsModule } from './transactions/transactions.module';
 import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 import { DistrictsModule } from './districts/districts.module';
 import { DatabaseModule } from './database/database.module';
+import { RolesModule } from './roles/roles.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({ isGlobal: true, expandVariables: true }),
     BillboardsModule,
     CitiesModule,
     ProductsModule,
@@ -22,6 +23,7 @@ import { DatabaseModule } from './database/database.module';
     SubscriptionsModule,
     DistrictsModule,
     DatabaseModule,
+    RolesModule,
   ],
 })
 export class AppModule {}

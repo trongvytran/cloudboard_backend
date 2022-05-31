@@ -1,6 +1,16 @@
-import { Billboard } from 'src/billboards/entities/billboard.entity';
-import { Subscription } from 'src/subscriptions/entities/subscription.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Billboard } from '../../billboards/entities/billboard.entity';
+import { Role } from '../../roles/entities/role.entity';
+import { Subscription } from '../../subscriptions/entities/subscription.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  ManyToMany,
+  JoinTable,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class User {
@@ -20,19 +30,17 @@ export class User {
   user_name: string;
 
   @Column()
-  imageURL: string;
+  image_url: string;
 
-  @Column()
-  type: string;
-
-  @Column()
-  created_at: Date;
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
 
   @Column()
   create_by: string;
 
   @Column()
-  modified_at: Date;
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
 
   @Column()
   modified_by: Date;
@@ -42,4 +50,8 @@ export class User {
 
   @OneToMany(() => Subscription, (subscription) => subscription.user)
   subscriptions: Subscription[];
+
+  @ManyToMany(() => Role)
+  @JoinTable()
+  roles: Role[];
 }

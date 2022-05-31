@@ -1,4 +1,4 @@
-import { Subscription } from 'src/subscriptions/entities/subscription.entity';
+import { Subscription } from '../../subscriptions/entities/subscription.entity';
 import {
   Entity,
   Column,
@@ -12,7 +12,6 @@ export class Transaction {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
   @OneToOne(() => Subscription)
   @JoinColumn()
   subscription: Subscription;

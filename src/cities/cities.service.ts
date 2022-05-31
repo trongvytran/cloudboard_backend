@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { from } from 'rxjs';
 import { Repository } from 'typeorm';
 import { CreateCityDto } from './dto/create-city.dto';
 import { UpdateCityDto } from './dto/update-city.dto';
@@ -13,7 +12,7 @@ export class CitiesService {
   ) {}
 
   create(createCityDto: CreateCityDto) {
-    return from(this.cityRepository.save(createCityDto));
+    return this.cityRepository.save(createCityDto);
   }
 
   findAll() {
@@ -21,14 +20,14 @@ export class CitiesService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} city`;
+    return this.cityRepository.findOneBy({ id });
   }
 
   update(id: number, updateCityDto: UpdateCityDto) {
-    return `This action updates a #${id} city`;
+    return this.cityRepository.update(id, updateCityDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} city`;
+    return this.cityRepository.delete(id);
   }
 }

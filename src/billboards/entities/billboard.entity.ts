@@ -1,9 +1,16 @@
-import { City } from 'src/cities/entities/city.entity';
-import { District } from 'src/districts/entities/district.entity';
-import { Subscription } from 'src/subscriptions/entities/subscription.entity';
-import { User } from 'src/users/entities/user.entity';
-import { Ward } from 'src/wards/entities/ward.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { City } from '../../cities/entities/city.entity';
+import { District } from '../../districts/entities/district.entity';
+import { Subscription } from '../../subscriptions/entities/subscription.entity';
+import { User } from '../../users/entities/user.entity';
+import { Ward } from '../../wards/entities/ward.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Billboard {
@@ -34,8 +41,8 @@ export class Billboard {
   @Column()
   name: string;
 
-  @Column()
-  detail_desc: string;
+  @Column({ name: 'detail_description' })
+  detailDescription: string;
 
   @Column()
   height: number;
@@ -43,17 +50,17 @@ export class Billboard {
   @Column()
   width: number;
 
-  @Column()
-  full_location: string;
+  @Column({ name: 'full_location' })
+  fullLocation: string;
 
   @Column()
   price: number;
 
-  @Column()
-  imageURL: string;
+  @Column({ name: 'image_url' })
+  imageUrl: string;
 
-  @Column()
-  videoURL: string;
+  @Column({ name: 'video_url' })
+  videoUrl: string;
 
   @Column()
   is_active: boolean;
@@ -61,14 +68,14 @@ export class Billboard {
   @Column()
   approved_by: string;
 
-  @Column()
-  created_at: Date;
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
 
   @Column()
   create_by: string;
 
-  @Column()
-  modified_at: Date;
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
 
   @Column()
   modified_by: Date;
