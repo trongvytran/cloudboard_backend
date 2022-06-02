@@ -62,21 +62,21 @@ export class Billboard {
   @Column({ name: 'video_url' })
   videoUrl: string;
 
-  @Column()
-  is_active: boolean;
+  @Column({ name: 'is_active', default: false })
+  isActive: boolean;
 
-  @Column()
-  approved_by: string;
+  @Column({ name: 'approved_by' })
+  approvedBy: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @Column()
-  create_by: string;
+  @Column({ name: 'expired_at' })
+  expiredAt: Date;
+
+  @Column({ name: 'created_by' })
+  createdBy: string;
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
-
-  @Column()
-  modified_by: Date;
 }

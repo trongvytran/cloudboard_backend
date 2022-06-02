@@ -12,11 +12,7 @@ describe('CitiesService', () => {
         CitiesService,
         {
           provide: getRepositoryToken(City),
-          useValue: {
-            create: jest.fn(),
-            save: jest.fn(),
-            findOneBy: jest.fn(),
-          },
+          useValue: {},
         },
       ],
     }).compile();

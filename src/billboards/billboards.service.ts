@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateBillboardDto } from './dto/create-billboard.dto';
 import { UpdateBillboardDto } from './dto/update-billboard.dto';
+import { Billboard } from './entities/billboard.entity';
 
 @Injectable()
 export class BillboardsService {
+  constructor(
+    @InjectRepository(Billboard)
+    private billboardRepository: Repository<Billboard>,
+  ) {}
+
   create(createBillboardDto: CreateBillboardDto) {
-    return 'This action adds a new billboard';
+    return this.billboardRepository.save(createBillboardDto);
   }
 
   findAll() {
-    return `This action returns all billboards`;
+    return this.billboardRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} billboard`;
+    return this.billboardRepository.findOneBy({ id });
   }
 
   update(id: number, updateBillboardDto: UpdateBillboardDto) {
-    return `This action updates a #${id} billboard`;
+    return this.billboardRepository.update(id, updateBillboardDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} billboard`;
+    return this.billboardRepository.delete(id);
   }
 }

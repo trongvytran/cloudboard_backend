@@ -11,6 +11,7 @@ import { RolesService } from './roles.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Role } from './entities/role.entity';
 
 @Controller('roles')
 @ApiTags('roles')
@@ -25,7 +26,7 @@ export class RolesController {
 
   @Get()
   @ApiOperation({ summary: 'Get all roles' })
-  findAll() {
+  findAll(): Promise<Role[]> {
     return this.rolesService.findAll();
   }
 

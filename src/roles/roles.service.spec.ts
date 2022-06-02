@@ -12,11 +12,7 @@ describe('RolesService', () => {
         RolesService,
         {
           provide: getRepositoryToken(Role),
-          useValue: {
-            create: jest.fn(),
-            save: jest.fn(),
-            findOneBy: jest.fn(),
-          },
+          useValue: {},
         },
       ],
     }).compile();

@@ -23,27 +23,27 @@ export class User {
   @Column()
   email: string;
 
-  @Column()
-  phone_number: string;
+  @Column({ name: 'phone_number' })
+  phoneNumber: string;
+
+  @Column({ name: 'user_name' })
+  userName: string;
 
   @Column()
-  user_name: string;
+  password: string;
 
-  @Column()
-  image_url: string;
+  @Column({ name: 'image_url' })
+  imageUrl: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
   @Column()
-  create_by: string;
+  created_by: string;
 
   @Column()
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
-
-  @Column()
-  modified_by: Date;
 
   @OneToMany(() => Billboard, (billboard) => billboard.user)
   billboards: Billboard[];
