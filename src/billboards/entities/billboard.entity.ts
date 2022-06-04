@@ -23,7 +23,7 @@ export class Billboard {
   @ManyToOne(() => City, (city) => city.billboards)
   city: City;
 
-  @ManyToOne(() => District, (distinct) => distinct.billboards)
+  @ManyToOne(() => District, (district) => district.billboards)
   district: District;
 
   @ManyToOne(() => Ward, (ward) => ward.billboards)

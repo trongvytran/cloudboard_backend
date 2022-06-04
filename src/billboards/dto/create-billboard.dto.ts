@@ -30,4 +30,14 @@ export class CreateBillboardDto {
 
   @ApiProperty()
   videoUrl: string;
+
+  @ApiProperty()
+  approvedBy: string;
+
+  @ApiProperty()
+  expiredAt: Date;
+
+  @ApiProperty()
+  createdBy: string;
+
 }

@@ -17,11 +17,11 @@ export class BillboardsService {
   }
 
   findAll() {
-    return this.billboardRepository.find();
+    return this.billboardRepository.find({ relations: ["district", "city", "ward", "subscription"] });
   }
 
   findOne(id: number) {
-    return this.billboardRepository.findOneBy({ id });
+    return this.billboardRepository.findOne({where: {id:id}, relations: ["district", "city", "ward", "subscription"]});
   }
 
   update(id: number, updateBillboardDto: UpdateBillboardDto) {
