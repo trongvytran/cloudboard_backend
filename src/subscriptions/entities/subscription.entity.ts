@@ -1,5 +1,4 @@
 import { Billboard } from '../../billboards/entities/billboard.entity';
-import { Product } from '../../products/entities/product.entity';
 import { User } from '../../users/entities/user.entity';
 import {
   Entity,
@@ -17,8 +16,8 @@ export class Subscription {
   @ManyToOne(() => User, (user) => user.subscriptions)
   user: User;
 
-  @ManyToOne(() => Product, (product) => product.subscriptions)
-  product: Product;
+  @ManyToOne(() => Billboard, (billboard) => billboard.subscription)
+  billboard: Billboard;
 
   @Column()
   period_start: Date;
