@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { City } from '../../cities/entities/city.entity';
 
 export class CreateBillboardDto {
   @ApiProperty()
@@ -40,4 +41,6 @@ export class CreateBillboardDto {
   @ApiProperty()
   createdBy: string;
 
+  @ApiProperty()
+  city: City;
 }

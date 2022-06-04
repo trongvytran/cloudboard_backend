@@ -7,13 +7,16 @@ import {
   OneToMany,
   Unique,
 } from 'typeorm';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 @Unique(['name'])
 export class City {
+  @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty()
   @Column()
   name: string;
 

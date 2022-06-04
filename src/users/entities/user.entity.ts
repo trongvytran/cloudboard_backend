@@ -39,9 +39,6 @@ export class User {
   createdAt: Date;
 
   @Column()
-  created_by: string;
-
-  @Column()
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
