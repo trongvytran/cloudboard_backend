@@ -59,6 +59,9 @@ export class Billboard {
   @Column()
   price: number;
 
+  @Column()
+  view: number;
+
   @Column({ name: 'image_url' })
   imageUrl: string;
 
