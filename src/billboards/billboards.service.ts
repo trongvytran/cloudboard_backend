@@ -18,14 +18,14 @@ export class BillboardsService {
 
   findAll() {
     return this.billboardRepository.find({
-      relations: ['district', 'city', 'ward', 'subscription'],
+      relations: ['district', 'city', 'ward', 'subscription', 'user'],
     });
   }
 
   findOne(id: number) {
     return this.billboardRepository.findOne({
       where: { id: id },
-      relations: ['district', 'city', 'ward', 'subscription'],
+      relations: ['district', 'city', 'ward', 'subscription', 'user'],
     });
   }
 

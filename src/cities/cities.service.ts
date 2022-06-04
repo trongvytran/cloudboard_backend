@@ -16,7 +16,7 @@ export class CitiesService {
   }
 
   findAll() {
-    return this.cityRepository.find();
+    return this.cityRepository.find({ relations: ['districts'] });
   }
 
   findOne(id: number) {

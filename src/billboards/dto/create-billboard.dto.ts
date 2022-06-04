@@ -1,4 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { District } from 'src/districts/entities/district.entity';
+import { User } from '../../users/entities/user.entity';
+import { Ward } from '../../wards/entities/ward.entity';
 import { City } from '../../cities/entities/city.entity';
 
 export class CreateBillboardDto {
@@ -43,4 +46,13 @@ export class CreateBillboardDto {
 
   @ApiProperty()
   city: City;
+
+  @ApiProperty()
+  user: User;
+
+  @ApiProperty()
+  district: District;
+
+  @ApiProperty()
+  ward: Ward;
 }
