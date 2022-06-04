@@ -11,9 +11,6 @@ export class CreateUserDto {
   @ApiProperty({ example: '0909123456' })
   phoneNumber: string;
 
-  @ApiProperty({ example: 'hoanganleba' })
-  userName: string;
-
   @ApiProperty({ example: 'https://www.w3schools.com/howto/img_avatar.png' })
   imageUrl: string;
 

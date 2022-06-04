@@ -27,12 +27,8 @@ export class User {
   email: string;
 
   @ApiProperty()
-  @Column({ name: 'phone_number' })
+  @Column({ name: 'phone_number', default: '' })
   phoneNumber: string;
-
-  @ApiProperty()
-  @Column({ name: 'user_name' })
-  userName: string;
 
   @Column({ default: null })
   password: string;

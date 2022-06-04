@@ -13,7 +13,13 @@ export class UsersService {
     @InjectRepository(Role) private roleRepository: Repository<Role>,
   ) {}
 
-  async create(createUserDto: CreateUserDto) {
+  async login(createUserDto: CreateUserDto) {
+    const user = await this.userRepository.findOne({
+      where: { email: createUserDto.email },
+    });
+    if (user) {
+      return user;
+    }
     const role = await this.roleRepository.findOne({ where: { name: 'User' } });
     createUserDto.role = role;
     return this.userRepository.save(createUserDto);
