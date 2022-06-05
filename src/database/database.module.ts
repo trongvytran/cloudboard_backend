@@ -15,9 +15,17 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DB'),
         entities: [__dirname + '/**/*.entity.ts'],
-        synchronize: true,
+        synchronize:
+          process.env.NODE_ENV === 'test' ||
+          process.env.NODE_ENV === 'development'
+            ? true
+            : false,
         autoLoadEntities: true,
-        // dropSchema: true,
+        dropSchema:
+          process.env.NODE_ENV === 'test' ||
+          process.env.NODE_ENV === 'development'
+            ? true
+            : false,
       }),
     }),
   ],

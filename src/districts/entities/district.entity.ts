@@ -7,10 +7,12 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   ManyToOne,
+  Unique,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
+@Unique(['name'])
 export class District {
   @ApiProperty()
   @PrimaryGeneratedColumn()

@@ -6,7 +6,7 @@ import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { City } from '../src/cities/entities/city.entity';
 
-describe('RolesController (e2e)', () => {
+describe('CitiesController (e2e)', () => {
   let app: INestApplication;
   let cityRepository: Repository<City>;
 
@@ -20,7 +20,6 @@ describe('RolesController (e2e)', () => {
     cityRepository = moduleFixture.get(getRepositoryToken(City));
     app.setGlobalPrefix('api');
 
-    // Insert mock data to database
     cityRepository.insert([
       {
         name: 'Ho Chi Minh',
@@ -41,26 +40,28 @@ describe('RolesController (e2e)', () => {
       .expect(200);
 
     expect(response.body.length).toBeGreaterThanOrEqual(1);
-    expect(response.body).toStrictEqual([{ id: 1, name: 'Ho Chi Minh' }]);
+    expect(response.body).toEqual([
+      {
+        id: expect.any(Number),
+        name: 'Ho Chi Minh',
+        districts: expect.any(Array),
+      },
+    ]);
   });
 
   it('/api/cities/1 (GET)', async () => {
-    const response = await request(app.getHttpServer())
+    await request(app.getHttpServer())
       .get('/api/cities/1')
       .expect('Content-Type', /json/)
       .expect(200);
-
-    expect(response.body).toStrictEqual({ id: 1, name: 'Ho Chi Minh' });
   });
 
   it('/api/cities (POST)', async () => {
-    const response = await request(app.getHttpServer())
+    await request(app.getHttpServer())
       .post('/api/cities')
       .send({ name: 'Da Nang' })
       .expect('Content-Type', /json/)
       .expect(201);
-
-    expect(response.body).toStrictEqual({ id: 2, name: 'Da Nang' });
   });
 
   it('/api/cities/1 (PUT)', async () => {

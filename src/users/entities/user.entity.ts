@@ -9,10 +9,12 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  Unique,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
+@Unique(['email'])
 export class User {
   @ApiProperty()
   @PrimaryGeneratedColumn()
