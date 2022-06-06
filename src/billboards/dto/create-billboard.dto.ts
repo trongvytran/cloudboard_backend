@@ -27,6 +27,9 @@ export class CreateBillboardDto {
   price: number;
 
   @ApiProperty()
+  view: number;
+
+  @ApiProperty()
   imageUrl: string;
 
   @ApiProperty()
