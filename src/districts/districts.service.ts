@@ -17,7 +17,7 @@ export class DistrictsService {
   }
 
   findAll() {
-    return this.districtRepository.find();
+    return this.districtRepository.find({ relations: ['wards'] });
   }
 
   findOne(id: number) {

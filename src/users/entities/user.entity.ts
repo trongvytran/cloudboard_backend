@@ -6,32 +6,34 @@ import {
   Column,
   PrimaryGeneratedColumn,
   OneToMany,
-  ManyToMany,
-  JoinTable,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from 'typeorm';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class User {
+  @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty()
   @Column()
   name: string;
 
+  @ApiProperty()
   @Column()
   email: string;
 
-  @Column({ name: 'phone_number' })
+  @ApiProperty()
+  @Column({ name: 'phone_number', default: '' })
   phoneNumber: string;
 
-  @Column({ name: 'user_name' })
-  userName: string;
-
-  @Column()
+  @Column({ default: null })
   password: string;
 
+  @ApiProperty()
   @Column({ name: 'image_url' })
   imageUrl: string;
 
@@ -48,7 +50,6 @@ export class User {
   @OneToMany(() => Subscription, (subscription) => subscription.user)
   subscriptions: Subscription[];
 
-  @ManyToMany(() => Role)
-  @JoinTable()
-  roles: Role[];
+  @ManyToOne(() => Role, (role) => role.users)
+  role: Role;
 }
