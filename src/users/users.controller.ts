@@ -17,12 +17,12 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post('/login')
+  @Post()
   @ApiOperation({
-    summary: 'Login using Google Facebook. Create new user if not exist',
+    summary: 'Create new user',
   })
-  login(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.login(createUserDto);
+  create(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.create(createUserDto);
   }
 
   @Get()

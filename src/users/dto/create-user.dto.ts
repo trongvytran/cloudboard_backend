@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Role } from '../../roles/entities/role.entity';
 
 export class CreateUserDto {
@@ -8,7 +8,7 @@ export class CreateUserDto {
   @ApiProperty({ example: 'hoanganleba@gmail.com' })
   email: string;
 
-  @ApiProperty({ example: '0909123456' })
+  @ApiPropertyOptional({ example: '0909123456' })
   phoneNumber: string;
 
   @ApiProperty({ example: 'https://www.w3schools.com/howto/img_avatar.png' })

@@ -7,6 +7,8 @@ import {
   OneToMany,
   ManyToOne,
 } from 'typeorm';
+import { subscriptionStatusEnum } from '../enums/subscriptionStatus.enum';
+import { subscriptionNameEnum } from '../enums/subscriptionName.enum';
 
 @Entity()
 export class Subscription {
@@ -16,26 +18,26 @@ export class Subscription {
   @ManyToOne(() => User, (user) => user.subscriptions)
   user: User;
 
-  @ManyToOne(() => Billboard, (billboard) => billboard.subscription)
-  billboard: Billboard;
+  @Column()
+  name: subscriptionNameEnum;
+
+  @Column({ name: 'period_start' })
+  periodStart: Date;
+
+  @Column({ name: 'period_end' })
+  periodEnd: Date;
+
+  @Column({ name: 'is_cancel_at_period_end', default: false })
+  isCancelAtPeriodEnd: boolean;
+
+  @Column({ name: 'cancelled_at', default: null })
+  cancelledAt: Date;
+
+  @Column({ name: 'cancelled_by', default: null })
+  cancelledBy: string;
 
   @Column()
-  period_start: Date;
-
-  @Column()
-  period_end: Date;
-
-  @Column()
-  cancel_at_period_end: boolean;
-
-  @Column()
-  cancelled_at: Date;
-
-  @Column()
-  cancelled_by: string;
-
-  @Column()
-  status: boolean;
+  status: subscriptionStatusEnum;
 
   @OneToMany(() => Billboard, (billboard) => billboard.subscription)
   billboards: Billboard[];

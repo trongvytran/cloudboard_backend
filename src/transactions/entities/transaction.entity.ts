@@ -5,6 +5,7 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
+  CreateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -19,9 +20,9 @@ export class Transaction {
   @Column()
   amount: number;
 
-  @Column()
-  create_date: Date;
+  @CreateDateColumn({ name: 'created_date' })
+  createDate: Date;
 
-  @Column()
-  is_success: boolean;
+  @Column({ name: 'is_success' })
+  isSuccess: boolean;
 }
