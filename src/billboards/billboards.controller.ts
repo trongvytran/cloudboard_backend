@@ -7,10 +7,11 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { BillboardsService } from './billboards.service';
 import { CreateBillboardDto } from './dto/create-billboard.dto';
 import { UpdateBillboardDto } from './dto/update-billboard.dto';
+import { Billboard } from './entities/billboard.entity';
 
 @Controller('billboards')
 @ApiTags('billboards')
@@ -31,6 +32,10 @@ export class BillboardsController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Get billboard by id' })
+  @ApiOkResponse({
+    description: 'The billboard record by id',
+    type: Billboard,
+  })
   findOne(@Param('id') id: string) {
     return this.billboardsService.findOne(+id);
   }

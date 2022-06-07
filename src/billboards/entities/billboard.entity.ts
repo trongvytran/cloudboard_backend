@@ -32,17 +32,17 @@ export class Billboard {
   @ManyToOne(() => Subscription, (subscription) => subscription.billboards)
   subscription: Subscription;
 
-  @Column()
+  @Column({ type: 'float', default: 0 })
   lat: number;
 
-  @Column()
+  @Column({ type: 'float', default: 0 })
   long: number;
 
   @Column()
   name: string;
 
-  @Column({ name: 'detail_description' })
-  detailDescription: string;
+  @Column()
+  description: string;
 
   @Column()
   height: number;
@@ -50,16 +50,16 @@ export class Billboard {
   @Column()
   width: number;
 
-  @Column({ name: 'full_location' })
-  fullLocation: string;
+  @Column()
+  address: string;
 
   @Column()
-  duration: number;
+  duration: string;
 
   @Column()
-  price: number;
+  price: string;
 
-  @Column()
+  @Column({ default: 0 })
   view: number;
 
   @Column({ name: 'image_url' })
@@ -71,7 +71,7 @@ export class Billboard {
   @Column({ name: 'is_active', default: false })
   isActive: boolean;
 
-  @Column({ name: 'approved_by' })
+  @Column({ name: 'approved_by', default: null })
   approvedBy: string;
 
   @CreateDateColumn({ name: 'created_at' })
@@ -79,9 +79,6 @@ export class Billboard {
 
   @Column({ name: 'expired_at' })
   expiredAt: Date;
-
-  @Column({ name: 'created_by' })
-  createdBy: string;
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;

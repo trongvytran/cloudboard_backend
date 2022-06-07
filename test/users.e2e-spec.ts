@@ -3,29 +3,46 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { Repository } from 'typeorm';
-import { Role } from '../src/roles/entities/role.entity';
+import { User } from '../src/users/entities/user.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
+import { Role } from '../src/roles/entities/role.entity';
 
-describe('RolesController (e2e)', () => {
+describe('UsersController (e2e)', () => {
   let app: INestApplication;
+  let userRepository: Repository<User>;
   let roleRepository: Repository<Role>;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
-      providers: [{ provide: getRepositoryToken(Role), useValue: {} }],
+      providers: [
+        { provide: getRepositoryToken(Role), useValue: {} },
+        { provide: getRepositoryToken(User), useValue: {} },
+      ],
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    userRepository = moduleFixture.get(getRepositoryToken(User));
     roleRepository = moduleFixture.get(getRepositoryToken(Role));
     app.setGlobalPrefix('api');
 
-    roleRepository.insert([
+    await roleRepository.insert([
       {
         name: 'Admin',
       },
+      {
+        name: 'User',
+      },
     ]);
 
+    const userRole = await roleRepository.findOne({ where: { name: 'User' } });
+    const mockUser = {
+      name: 'Hoang An Le Ba',
+      email: 'hoanganleba@gmail.com',
+      imageUrl: 'https://www.w3schools.com/howto/img_avatar.png',
+      role: userRole,
+    };
+    await userRepository.save(mockUser);
     await app.init();
   });
 
@@ -33,46 +50,25 @@ describe('RolesController (e2e)', () => {
     await app.close();
   });
 
-  it('/api/roles (GET)', async () => {
+  it('/api/users (GET)', async () => {
     const response = await request(app.getHttpServer())
-      .get('/api/roles')
+      .get('/api/users')
       .expect('Content-Type', /json/)
       .expect(200);
 
     expect(response.body.length).toBeGreaterThanOrEqual(1);
-    expect(response.body).toEqual([{ id: 1, name: 'Admin' }]);
   });
 
-  it('/api/roles/1 (GET)', async () => {
-    const response = await request(app.getHttpServer())
-      .get('/api/roles/1')
-      .expect('Content-Type', /json/)
-      .expect(200);
-
-    expect(response.body).toEqual({ id: 1, name: 'Admin' });
-  });
-
-  it('/api/roles (POST)', async () => {
-    const response = await request(app.getHttpServer())
-      .post('/api/roles')
-      .send({ name: 'User' })
-      .expect('Content-Type', /json/)
-      .expect(201);
-
-    expect(response.body).toEqual({ id: 2, name: 'User' });
-  });
-
-  it('/api/roles/1 (PUT)', async () => {
+  it('/api/users/1 (GET)', async () => {
     await request(app.getHttpServer())
-      .put('/api/roles/1')
-      .send({ name: 'Admin1' })
+      .get('/api/users/1')
       .expect('Content-Type', /json/)
       .expect(200);
   });
 
-  it('/api/roles/1 (DELETE)', async () => {
+  it('/api/users/1 (DELETE)', async () => {
     await request(app.getHttpServer())
-      .delete('/api/roles/1')
+      .delete('/api/users/1')
       .expect('Content-Type', /json/)
       .expect(200);
   });
