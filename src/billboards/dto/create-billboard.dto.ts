@@ -35,6 +35,9 @@ export class CreateBillboardDto {
   @ApiProperty({ example: '6 months' })
   duration: string;
 
+  @ApiProperty()
+  view: number;
+
   @ApiProperty({ example: 'https://picsum.photos/id/11/200/300' })
   imageUrl: string;
 
