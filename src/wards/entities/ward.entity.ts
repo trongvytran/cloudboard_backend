@@ -24,6 +24,8 @@ export class Ward {
   @OneToMany(() => Billboard, (billboard) => billboard.ward)
   billboards: Billboard[];
 
-  @ManyToOne(() => District, (district) => district.wards)
+  @ManyToOne(() => District, (district) => district.wards, {
+    onDelete: 'CASCADE',
+  })
   district: District;
 }

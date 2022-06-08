@@ -16,14 +16,7 @@ export class AuthService {
     if (user) {
       return user;
     }
-
-    let role = await this.rolesService.findOneByName('User');
-
-    if (!role) {
-      await this.rolesService.create({ name: 'User' });
-    }
-
-    role = await this.rolesService.findOneByName('User');
+    const role = await this.rolesService.findOneByName('User');
     loginDto.role = role;
     return this.usersService.create(loginDto);
   }

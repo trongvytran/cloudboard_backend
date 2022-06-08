@@ -32,7 +32,7 @@ export class User {
   @Column({ name: 'phone_number', default: '' })
   phoneNumber: string;
 
-  @Column({ default: null })
+  @Column({ select: false, default: '' })
   password: string;
 
   @ApiProperty()

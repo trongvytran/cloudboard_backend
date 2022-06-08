@@ -28,6 +28,6 @@ export class District {
   @OneToMany(() => Ward, (ward) => ward.district)
   wards: Ward[];
 
-  @ManyToOne(() => City, (city) => city.districts)
+  @ManyToOne(() => City, (city) => city.districts, { onDelete: 'CASCADE' })
   city: City;
 }

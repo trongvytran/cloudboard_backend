@@ -10,6 +10,8 @@ import { DistrictsModule } from './districts/districts.module';
 import { DatabaseModule } from './database/database.module';
 import { RolesModule } from './roles/roles.module';
 import { AuthModule } from './auth/auth.module';
+import { AppService } from './app.service';
+import { SeedersModule } from './database/seeders.module';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { AuthModule } from './auth/auth.module';
     DatabaseModule,
     RolesModule,
     AuthModule,
+    SeedersModule,
   ],
+  providers: [AppService],
 })
 export class AppModule {}

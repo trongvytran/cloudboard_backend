@@ -2,29 +2,17 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
-import { Repository } from 'typeorm';
-import { getRepositoryToken } from '@nestjs/typeorm';
-import { City } from '../src/cities/entities/city.entity';
 
 describe('CitiesController (e2e)', () => {
   let app: INestApplication;
-  let cityRepository: Repository<City>;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
-      providers: [{ provide: getRepositoryToken(City), useValue: {} }],
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    cityRepository = moduleFixture.get(getRepositoryToken(City));
     app.setGlobalPrefix('api');
-
-    cityRepository.insert([
-      {
-        name: 'Ho Chi Minh',
-      },
-    ]);
 
     await app.init();
   });

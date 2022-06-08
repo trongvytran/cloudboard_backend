@@ -2,30 +2,17 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
-import { Repository } from 'typeorm';
-import { Role } from '../src/roles/entities/role.entity';
-import { getRepositoryToken } from '@nestjs/typeorm';
 
 describe('RolesController (e2e)', () => {
   let app: INestApplication;
-  let roleRepository: Repository<Role>;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
-      providers: [{ provide: getRepositoryToken(Role), useValue: {} }],
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    roleRepository = moduleFixture.get(getRepositoryToken(Role));
     app.setGlobalPrefix('api');
-
-    roleRepository.insert([
-      {
-        name: 'Admin',
-      },
-    ]);
-
     await app.init();
   });
 
@@ -40,7 +27,6 @@ describe('RolesController (e2e)', () => {
       .expect(200);
 
     expect(response.body.length).toBeGreaterThanOrEqual(1);
-    expect(response.body).toEqual([{ id: 1, name: 'Admin' }]);
   });
 
   it('/api/roles/1 (GET)', async () => {
@@ -55,11 +41,11 @@ describe('RolesController (e2e)', () => {
   it('/api/roles (POST)', async () => {
     const response = await request(app.getHttpServer())
       .post('/api/roles')
-      .send({ name: 'User' })
+      .send({ name: 'System' })
       .expect('Content-Type', /json/)
       .expect(201);
 
-    expect(response.body).toEqual({ id: 2, name: 'User' });
+    expect(response.body).toEqual({ id: 3, name: 'System' });
   });
 
   it('/api/roles/1 (PUT)', async () => {
