@@ -21,7 +21,7 @@ export class UsersService {
     });
   }
 
-  findOne(id: number): Promise<User> {
+  findOne(id: number): Promise<User | undefined> {
     return this.userRepository.findOne({
       where: { id },
       relations: ['role', 'billboards', 'subscriptions'],
