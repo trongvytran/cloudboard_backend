@@ -50,12 +50,6 @@ export class UsersController {
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
   }
-  @UseGuards(JwtAuthGuard)
-  @Get('/me')
-  me(@Req() request) {
-    const userId = request.user.userId;
-    return this.usersService.findOne(userId);
-  }
 
 
 }

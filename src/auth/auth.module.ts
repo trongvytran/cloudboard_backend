@@ -10,6 +10,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { JwtStrategy } from './jwt.strategy';
 
+
 @Module({
   imports: [TypeOrmModule.forFeature([User, Role]), RolesModule, UsersModule ],
   controllers: [AuthController],  

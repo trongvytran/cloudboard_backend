@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, HttpException, HttpStatus, Ip,Post, Req,} from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Ip,Post, Req, UseGuards,} from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { User } from '../users/entities/user.entity';
 import { AuthService } from './auth.service';
@@ -6,6 +6,7 @@ import { LoginDto } from './dto/login.dto';
 import RefreshTokenDto from './dto/refresh-token.dto';
 import GoogleTokenDto from './dto/google-token.dto';
 import { Request, Response } from 'express';
+import { AuthGuard } from "@nestjs/passport";
 @Controller('auth')
 @ApiTags('auth')
 export class AuthController {
@@ -59,4 +60,6 @@ export class AuthController {
   async logout(@Body() body: RefreshTokenDto) {
     return this.authService.logout(body.refreshToken);
   }
+
+
 }
