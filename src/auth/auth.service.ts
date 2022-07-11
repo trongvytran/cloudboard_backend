@@ -3,7 +3,6 @@ import { User } from '../users/entities/user.entity';
 import { RolesService } from '../roles/roles.service';
 import { UsersService } from '../users/users.service';
 import { LoginDto } from './dto/login.dto';
-import { JwtService } from '@nestjs/jwt';
 import RefreshToken from './entities/refresh-token.entity';
 import { sign, verify } from 'jsonwebtoken';
 import { Auth, google } from 'googleapis';
