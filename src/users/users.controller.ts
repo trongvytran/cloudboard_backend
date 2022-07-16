@@ -2,6 +2,7 @@ import {
   Controller,
   Get,
   Post,
+  Put,
   Body,
   Patch,
   Param,
@@ -31,11 +32,16 @@ export class UsersController {
   findAll() {
     return this.usersService.findAll();
   }
-  @UseGuards(JwtAuthGuard)
+//   @UseGuards(JwtAuthGuard)
   @Get(':id')
   @ApiOperation({ summary: 'Get user by id' })
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
+  }
+  @Get('/email/:email')
+    @ApiOperation({ summary: 'Get user by email' })
+    findOneEmail(@Param('email') email: string) {
+      return this.usersService.findOneByEmail(email);
   }
 
   @Patch(':id')
