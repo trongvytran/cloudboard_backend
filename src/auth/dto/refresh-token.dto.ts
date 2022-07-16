@@ -1,7 +1,4 @@
-
-
 class RefreshTokenDto {
-
   refreshToken: string;
 }
 

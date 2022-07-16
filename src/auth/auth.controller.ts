@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, HttpException, HttpStatus, Post, Req,} from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  HttpException,
+  HttpStatus,
+  Post,
+  Req,
+} from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { User } from '../users/entities/user.entity';
 import { AuthService } from './auth.service';
@@ -16,17 +24,14 @@ export class AuthController {
   })
   login(@Body() loginDto: LoginDto): Promise<User> {
     return this.authService.login(loginDto);
-    
   }
   @Post('/google/login')
   async googleLogin(
     @Body() body: GoogleTokenDto,
     @Req() req,
-   
   ): Promise<{ accessToken: string; refreshToken: string }> {
     const result = await this.authService.loginGoogleUser(body.token, {
       userAgent: req.headers['user-agent'],
-    
     });
     if (result) {
       return result;
@@ -43,8 +48,7 @@ export class AuthController {
 
   @Post('login2')
   async login2(@Req() request, @Body() body: LoginDto) {
-    return this.authService.login2(body.email,{
-
+    return this.authService.login2(body.email, {
       userAgent: request.headers['user-agent'],
     });
   }
@@ -58,6 +62,4 @@ export class AuthController {
   async logout(@Body() body: RefreshTokenDto) {
     return this.authService.logout(body.refreshToken);
   }
-
-
 }
