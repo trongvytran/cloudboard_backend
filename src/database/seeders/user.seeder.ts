@@ -19,12 +19,12 @@ export class UserSeeder {
           imageUrl: 'https://www.w3schools.com/howto/img_avatar.png',
           role: { id: 2, name: 'User' },
         },
-                {
-                  name: 'Minh',
-                  email: 'Minh@gmail.com',
-                  imageUrl: 'https://www.w3schools.com/howto/img_avatar.png',
-                  role: { id: 2, name: 'User' },
-                },
+        {
+          name: 'Minh',
+          email: 'Minh@gmail.com',
+          imageUrl: 'https://www.w3schools.com/howto/img_avatar.png',
+          role: { id: 2, name: 'User' },
+        },
       ]);
     }
   }

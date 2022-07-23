@@ -9,7 +9,6 @@ class RefreshToken {
   userId: number;
   userAgent: string;
 
-
   sign(): string {
     return sign({ ...this }, process.env.REFRESH_SECRET);
   }

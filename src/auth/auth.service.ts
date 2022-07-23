@@ -30,7 +30,7 @@ export class AuthService {
     loginDto.role = role;
     return this.usersService.create(loginDto);
   }
-  
+
   async loginGoogleUser(
     token: string,
     values: { userAgent: string },
@@ -54,11 +54,9 @@ export class AuthService {
     return this.newRefreshAndAccessToken(user, values);
   }
 
-
-
   private async newRefreshAndAccessToken(
     user: User,
-    values: { userAgent: string},
+    values: { userAgent: string },
   ): Promise<{ accessToken: string; refreshToken: string }> {
     const refreshObject = new RefreshToken({
       id:
@@ -83,7 +81,6 @@ export class AuthService {
     };
   }
 
-
   async logout(refreshStr): Promise<void> {
     const refreshToken = await this.retrieveRefreshToken(refreshStr);
 
@@ -95,8 +92,6 @@ export class AuthService {
       (refreshToken) => refreshToken.id !== refreshToken.id,
     );
   }
-
-
 
   private retrieveRefreshToken(
     refreshStr: string,
@@ -113,8 +108,6 @@ export class AuthService {
       return undefined;
     }
   }
-
-
 
   async refresh(refreshStr: string): Promise<string | undefined> {
     const refreshToken = await this.retrieveRefreshToken(refreshStr);
