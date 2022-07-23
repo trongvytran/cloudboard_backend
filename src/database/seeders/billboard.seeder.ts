@@ -21,8 +21,8 @@ export class BillboardSeeder {
     const subscription = await this.subscriptionRepository.findOneBy({ id: 1 });
     await this.billboardRepository.insert([
       {
-        lat: -42.44713,
-        long: -169.53328,
+        lat: 10.780654236388157,
+        long: 106.69928199981912,
         name: 'Vy Tran',
         description:
           'Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ',
@@ -42,8 +42,8 @@ export class BillboardSeeder {
         ward: { id: 1, name: 'Da Kao' },
       },
       {
-        lat: -47.44643,
-        long: -155.53028,
+        lat: 10.788348211833336, 
+        long: 106.69555990928687,
         name: 'Minh Pham',
         description:
           'Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ',
@@ -63,8 +63,8 @@ export class BillboardSeeder {
         ward: { id: 1, name: 'Da Kao' },
       },
       {
-        lat: -32.44353,
-        long: -195.53390,
+        lat: 10.780674163472378,
+        long: 106.70053997064987,
         name: 'An Le',
         description:
           'Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ',
