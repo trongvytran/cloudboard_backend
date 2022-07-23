@@ -41,6 +41,49 @@ export class BillboardSeeder {
         district: { id: 1, name: '1' },
         ward: { id: 1, name: 'Da Kao' },
       },
-    ]);
+      {
+        lat: -47.44643,
+        long: -155.53028,
+        name: 'Minh Pham',
+        description:
+          'Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ',
+        height: 14,
+        width: 48,
+        address: '123 Mac Đinh Chi, St.',
+        price: '90,000,000₫ - 100,000,000₫',
+        imageUrl: 'https://i.picsum.photos/id/49/200/300.jpg?hmac=mC_cJaZJfrb4JZcnITvz0OOwLCyOTLC0QXH4vTo9syY',
+        videoUrl:
+          'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley',
+        duration: '6 months',
+        expiredAt: new Date(),
+        city: { id: 1, name: 'Ho Chi Minh' },
+        user: user,
+        subscription: subscription,
+        district: { id: 1, name: '1' },
+        ward: { id: 1, name: 'Da Kao' },
+      },
+      {
+        lat: -32.44353,
+        long: -195.53390,
+        name: 'An Le',
+        description:
+          'Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ',
+        height: 14,
+        width: 48,
+        address: '123 Hai Ba Trung St.',
+        price: '200,000,000₫ - 360,000,000₫',
+        imageUrl: 'https://i.picsum.photos/id/182/200/300.jpg?hmac=W6MnOpe7fP0LlNAyWl6rzWbjyLOM3ix2TXRcFx7vEPE',
+        videoUrl:
+          'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley',
+        duration: '12 months',
+        expiredAt: new Date(),
+        city: { id: 1, name: 'Ho Chi Minh' },
+        user: user,
+        subscription: subscription,
+        district: { id: 1, name: '1' },
+        ward: { id: 1, name: 'Da Kao' },
+      },
+    ]
+    );
   }
 }
