@@ -53,6 +53,9 @@ export class Billboard {
   @Column()
   address: string;
 
+  @Column({type: "text",array: true,default: [] })
+  like: String[];
+
   @Column()
   duration: string;
 

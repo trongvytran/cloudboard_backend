@@ -21,8 +21,8 @@ export class BillboardSeeder {
     const subscription = await this.subscriptionRepository.findOneBy({ id: 1 });
     await this.billboardRepository.insert([
       {
-        lat: 10.782619838216272,
-        long: 106.70045961244851,
+        lat: 10.780654236388157,
+        long: 106.69928199981912,
         name: 'Vy Tran',
         description:
           'Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ',
@@ -41,18 +41,17 @@ export class BillboardSeeder {
         district: { id: 1, name: '1' },
         ward: { id: 1, name: 'Da Kao' },
       },
-
       {
-        lat: -42.44713,
-        long: -169.53328,
-        name: 'Vy Tran',
+        lat: 10.788348211833336, 
+        long: 106.69555990928687,
+        name: 'Minh Pham',
         description:
           'Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ',
         height: 14,
         width: 48,
-        address: '123 Le Duan St.',
-        price: '115,000,000₫ - 160,000,000₫',
-        imageUrl: 'https://picsum.photos/id/11/200/300',
+        address: '123 Mac Đinh Chi, St.',
+        price: '90,000,000₫ - 100,000,000₫',
+        imageUrl: 'https://i.picsum.photos/id/49/200/300.jpg?hmac=mC_cJaZJfrb4JZcnITvz0OOwLCyOTLC0QXH4vTo9syY',
         videoUrl:
           'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley',
         duration: '6 months',
@@ -63,18 +62,17 @@ export class BillboardSeeder {
         district: { id: 1, name: '1' },
         ward: { id: 1, name: 'Da Kao' },
       },
-
       {
-        lat: -42.44713,
-        long: -169.53328,
-        name: 'Vy Tran',
+        lat: 10.780674163472378,
+        long: 106.70053997064987,
+        name: 'An Le',
         description:
           'Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ',
         height: 14,
         width: 48,
-        address: '123 Le Duan St.',
-        price: '115,000,000₫ - 160,000,000₫',
-        imageUrl: 'https://picsum.photos/id/11/200/300',
+        address: '123 Hai Ba Trung St.',
+        price: '200,000,000₫ - 360,000,000₫',
+        imageUrl: 'https://i.picsum.photos/id/182/200/300.jpg?hmac=W6MnOpe7fP0LlNAyWl6rzWbjyLOM3ix2TXRcFx7vEPE',
         videoUrl:
           'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley',
         duration: '12 months',
@@ -85,6 +83,7 @@ export class BillboardSeeder {
         district: { id: 1, name: '1' },
         ward: { id: 1, name: 'Da Kao' },
       },
-    ]);
+    ]
+    );
   }
 }
