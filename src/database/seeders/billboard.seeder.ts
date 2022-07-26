@@ -21,8 +21,8 @@ export class BillboardSeeder {
     const subscription = await this.subscriptionRepository.findOneBy({ id: 1 });
     await this.billboardRepository.insert([
       {
-        lat: -42.44713,
-        long: -169.53328,
+        lat: 10.782619838216272,
+        long: 106.70045961244851,
         name: 'Vy Tran',
         description:
           'Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ',
