@@ -6,14 +6,17 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { JWTAuthGuard } from '../auth/jwt-auth.guard';
 import { DistrictsService } from './districts.service';
 import { CreateDistrictDto } from './dto/create-district.dto';
 import { UpdateDistrictDto } from './dto/update-district.dto';
 
 @Controller('districts')
 @ApiTags('districts')
+@UseGuards(JWTAuthGuard)
 export class DistrictsController {
   constructor(private readonly districtsService: DistrictsService) {}
 

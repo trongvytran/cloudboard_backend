@@ -2,7 +2,6 @@ import {
   Controller,
   Get,
   Post,
-  Put,
   Body,
   Patch,
   Param,
@@ -13,9 +12,12 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { JWTAuthGuard } from '../auth/jwt-auth.guard';
+import { Role } from '../auth/role.decorator';
+
 @Controller('users')
 @ApiTags('users')
+@UseGuards(JWTAuthGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -28,20 +30,16 @@ export class UsersController {
   }
 
   @Get()
+  @Role('Admin')
   @ApiOperation({ summary: 'Get all users' })
   findAll() {
     return this.usersService.findAll();
   }
-//   @UseGuards(JwtAuthGuard)
+
   @Get(':id')
   @ApiOperation({ summary: 'Get user by id' })
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
-  }
-  @Get('/email/:email')
-    @ApiOperation({ summary: 'Get user by email' })
-    findOneEmail(@Param('email') email: string) {
-      return this.usersService.findOneByEmail(email);
   }
 
   @Patch(':id')

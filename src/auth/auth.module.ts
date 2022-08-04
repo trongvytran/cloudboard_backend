@@ -6,10 +6,7 @@ import { Role } from '../roles/entities/role.entity';
 import { RolesModule } from '../roles/roles.module';
 import { User } from '../users/entities/user.entity';
 import { UsersModule } from '../users/users.module';
-import { JwtStrategy } from './jwt.strategy';
 import { HttpModule } from '@nestjs/axios';
-import { jwtConstants } from './constants';
-import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -17,13 +14,9 @@ import { JwtModule } from '@nestjs/jwt';
     RolesModule,
     UsersModule,
     HttpModule,
-    JwtModule.register({
-      secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
-    }),
   ],
   controllers: [AuthController],
-  providers: [JwtStrategy, AuthService],
+  providers: [AuthService],
   exports: [AuthService],
 })
 export class AuthModule {}

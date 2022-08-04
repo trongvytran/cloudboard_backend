@@ -6,14 +6,17 @@ import {
   Param,
   Delete,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { JWTAuthGuard } from '../auth/jwt-auth.guard';
 import { CitiesService } from './cities.service';
 import { CreateCityDto } from './dto/create-city.dto';
 import { UpdateCityDto } from './dto/update-city.dto';
 
 @Controller('cities')
 @ApiTags('cities')
+@UseGuards(JWTAuthGuard)
 export class CitiesController {
   constructor(private readonly citiesService: CitiesService) {}
 

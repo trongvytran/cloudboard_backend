@@ -6,6 +6,7 @@ import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
 import { FacebookTokenDto } from './dto/facebook-token.dto';
 import { JwtService } from '@nestjs/jwt';
+import { Role } from '../roles/entities/role.entity';
 
 @Injectable()
 export class AuthService {
@@ -16,6 +17,25 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
+  generateJwtToken(user: {
+    id: any;
+    name: string;
+    email: string;
+    imageUrl: string;
+    phoneNumber: string;
+    role: Role;
+  }) {
+    const payload = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      imageUrl: user.imageUrl,
+      phoneNumber: user.phoneNumber,
+      role: user.role.name,
+    };
+    return { token: this.jwtService.sign(payload), user: payload };
+  }
+
   async googleLogin(googleTokenDto: GoogleTokenDto) {
     const res = await lastValueFrom(
       this.httpService.get(
@@ -25,13 +45,7 @@ export class AuthService {
 
     const user = await this.usersService.findOneByEmail(res.data.email);
     if (user) {
-      const payload = {
-        name: user.name,
-        email: user.email,
-        imageUrl: user.imageUrl,
-        phoneNumber: user.phoneNumber,
-      };
-      return { token: this.jwtService.sign(payload), user: payload };
+      return this.generateJwtToken(user);
     }
     const role = await this.rolesService.findOneByName('User');
     const registerInfo = {
@@ -42,13 +56,7 @@ export class AuthService {
       role,
     };
     const newUser = await this.usersService.create(registerInfo);
-    const payload = {
-      name: newUser.name,
-      email: newUser.email,
-      imageUrl: newUser.imageUrl,
-      phoneNumber: newUser.phoneNumber,
-    };
-    return { token: this.jwtService.sign(payload), user: payload };
+    return this.generateJwtToken(newUser);
   }
 
   async facebookLogin(facebookTokenDto: FacebookTokenDto) {
@@ -60,13 +68,7 @@ export class AuthService {
 
     const user = await this.usersService.findOneByEmail(res.data.email);
     if (user) {
-      const payload = {
-        name: user.name,
-        email: user.email,
-        imageUrl: user.imageUrl,
-        phoneNumber: user.phoneNumber,
-      };
-      return { token: this.jwtService.sign(payload), user: payload };
+      return this.generateJwtToken(user);
     }
     const role = await this.rolesService.findOneByName('User');
     const registerInfo = {
@@ -77,12 +79,6 @@ export class AuthService {
       role,
     };
     const newUser = await this.usersService.create(registerInfo);
-    const payload = {
-      name: newUser.name,
-      email: newUser.email,
-      imageUrl: newUser.imageUrl,
-      phoneNumber: newUser.phoneNumber,
-    };
-    return { token: this.jwtService.sign(payload), user: payload };
+    return this.generateJwtToken(newUser);
   }
 }
