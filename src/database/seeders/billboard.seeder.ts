@@ -42,7 +42,7 @@ export class BillboardSeeder {
         ward: { id: 1, name: 'Da Kao' },
       },
       {
-        lat: 10.788348211833336, 
+        lat: 10.788348211833336,
         long: 106.69555990928687,
         name: 'Minh Pham',
         description:
@@ -51,7 +51,8 @@ export class BillboardSeeder {
         width: 48,
         address: '123 Mac Đinh Chi, St.',
         price: '90,000,000₫ - 100,000,000₫',
-        imageUrl: 'https://i.picsum.photos/id/49/200/300.jpg?hmac=mC_cJaZJfrb4JZcnITvz0OOwLCyOTLC0QXH4vTo9syY',
+        imageUrl:
+          'https://i.picsum.photos/id/49/200/300.jpg?hmac=mC_cJaZJfrb4JZcnITvz0OOwLCyOTLC0QXH4vTo9syY',
         videoUrl:
           'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley',
         duration: '6 months',
@@ -72,7 +73,8 @@ export class BillboardSeeder {
         width: 48,
         address: '123 Hai Ba Trung St.',
         price: '200,000,000₫ - 360,000,000₫',
-        imageUrl: 'https://i.picsum.photos/id/182/200/300.jpg?hmac=W6MnOpe7fP0LlNAyWl6rzWbjyLOM3ix2TXRcFx7vEPE',
+        imageUrl:
+          'https://i.picsum.photos/id/182/200/300.jpg?hmac=W6MnOpe7fP0LlNAyWl6rzWbjyLOM3ix2TXRcFx7vEPE',
         videoUrl:
           'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley',
         duration: '12 months',
@@ -83,7 +85,6 @@ export class BillboardSeeder {
         district: { id: 1, name: '1' },
         ward: { id: 1, name: 'Da Kao' },
       },
-    ]
-    );
+    ]);
   }
 }
