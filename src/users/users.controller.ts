@@ -17,7 +17,7 @@ import { Role } from '../auth/role.decorator';
 
 @Controller('users')
 @ApiTags('users')
-@UseGuards(JWTAuthGuard)
+// @UseGuards(JWTAuthGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -40,7 +40,7 @@ export class UsersController {
   @ApiOperation({ summary: 'Get user by id' })
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
-  }
+  }ø
 
   @Patch(':id')
   @ApiOperation({ summary: 'Update user by id' })

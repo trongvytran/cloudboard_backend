@@ -74,7 +74,7 @@ export class AuthService {
     const registerInfo = {
       name: res.data.name,
       email: res.data.email,
-      imageUrl: res.data.picture,
+      imageUrl: res.data.picture.data.url,
       phoneNumber: '',
       role,
     };
