@@ -8,6 +8,7 @@ import {
   OneToMany,
   ManyToOne,
   Unique,
+  Index,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -20,6 +21,7 @@ export class District {
 
   @ApiProperty()
   @Column()
+  @Index()
   name: string;
 
   @OneToMany(() => Billboard, (billboard) => billboard.district)

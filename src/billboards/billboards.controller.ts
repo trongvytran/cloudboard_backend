@@ -8,7 +8,12 @@ import {
   Delete,
   Query,
 } from '@nestjs/common';
-import { ApiOkResponse, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
+import {
+  ApiOkResponse,
+  ApiOperation,
+  ApiQuery,
+  ApiTags,
+} from '@nestjs/swagger';
 import { BillboardsService } from './billboards.service';
 import { CreateBillboardDto } from './dto/create-billboard.dto';
 import { UpdateBillboardDto } from './dto/update-billboard.dto';
@@ -29,7 +34,10 @@ export class BillboardsController {
   @ApiOperation({ summary: 'Get all billboards' })
   @ApiQuery({ name: 'search', required: false })
   findAll(@Query('search') search: string) {
-    return this.billboardsService.findAll(search);
+    if (search) {
+      return this.billboardsService.search(search);
+    }
+    return this.billboardsService.findAll();
   }
 
   @Get(':id')

@@ -16,16 +16,37 @@ export class BillboardsService {
     return this.billboardRepository.save(createBillboardDto);
   }
 
-  findAll(search: string) {
-    if (search) {
-      return this.billboardRepository.find({
-        where: {
-          name: Like(`%${search}%`),
-        },
-        relations: ['district', 'city', 'ward', 'subscription', 'user'],
-      });
-    }
+  findAll() {
     return this.billboardRepository.find({
+      relations: ['district', 'city', 'ward', 'subscription', 'user'],
+    });
+  }
+
+  search(value: string) {
+    return this.billboardRepository.find({
+      where: [
+        {
+          name: Like(`%${value}%`),
+        },
+        {
+          address: Like(`%${value}%`),
+        },
+        {
+          city: {
+            name: Like(`%${value}%`),
+          },
+        },
+        {
+          district: {
+            name: Like(`%${value}%`),
+          },
+        },
+        {
+          ward: {
+            name: Like(`%${value}%`),
+          },
+        },
+      ],
       relations: ['district', 'city', 'ward', 'subscription', 'user'],
     });
   }
