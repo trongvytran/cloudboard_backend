@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { CreateBillboardDto } from './dto/create-billboard.dto';
 import { UpdateBillboardDto } from './dto/update-billboard.dto';
 import { Billboard } from './entities/billboard.entity';
@@ -18,6 +18,35 @@ export class BillboardsService {
 
   findAll() {
     return this.billboardRepository.find({
+      relations: ['district', 'city', 'ward', 'subscription', 'user'],
+    });
+  }
+
+  search(value: string) {
+    return this.billboardRepository.find({
+      where: [
+        {
+          name: Like(`%${value}%`),
+        },
+        {
+          address: Like(`%${value}%`),
+        },
+        {
+          city: {
+            name: Like(`%${value}%`),
+          },
+        },
+        {
+          district: {
+            name: Like(`%${value}%`),
+          },
+        },
+        {
+          ward: {
+            name: Like(`%${value}%`),
+          },
+        },
+      ],
       relations: ['district', 'city', 'ward', 'subscription', 'user'],
     });
   }

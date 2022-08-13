@@ -10,6 +10,7 @@ import {
   ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
+  Index,
 } from 'typeorm';
 
 @Entity()
@@ -39,6 +40,7 @@ export class Billboard {
   long: number;
 
   @Column()
+  @Index()
   name: string;
 
   @Column()
@@ -51,10 +53,11 @@ export class Billboard {
   width: number;
 
   @Column()
+  @Index()
   address: string;
 
-  @Column({type: "text",array: true,default: [] })
-  like: String[];
+  @ManyToOne(() => User, (user) => user.billboards, { onDelete: 'CASCADE' })
+  like: User;
 
   @Column()
   duration: string;
