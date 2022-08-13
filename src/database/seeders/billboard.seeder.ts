@@ -49,6 +49,7 @@ export class BillboardSeeder {
           'Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ',
         height: 14,
         width: 48,
+        view: 100,
         address: '123 Mac Đinh Chi, St.',
         price: '90,000,000₫ - 100,000,000₫',
         imageUrl:
