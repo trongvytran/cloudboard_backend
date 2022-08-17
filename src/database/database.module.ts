@@ -13,17 +13,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
           rejectUnauthorized: false,
         },
         url: configService.get('DATABASE_URL'),
-        entities: [
-          process.env.NODE_ENV === 'test' ||
-          process.env.NODE_ENV === 'development'
-            ? `${__dirname + '/**/*.entity.ts'}`
-            : 'dist/**/*.entity.js',
-        ],
-        synchronize:
-          process.env.NODE_ENV === 'test' ||
-          process.env.NODE_ENV === 'development'
-            ? true
-            : false,
+        entities: [__dirname + '/**/*.entity.ts'],
+        synchronize: true,
         autoLoadEntities: true,
         dropSchema:
           process.env.NODE_ENV === 'test' ||
