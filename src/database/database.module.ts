@@ -14,7 +14,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         },
         url: configService.get('DATABASE_URL'),
         entities: [__dirname + '/**/*.entity.ts'],
-        synchronize: true,
+        synchronize:
+          process.env.NODE_ENV === 'test' ||
+          process.env.NODE_ENV === 'development'
+            ? true
+            : false,
         autoLoadEntities: true,
         dropSchema:
           process.env.NODE_ENV === 'test' ||
