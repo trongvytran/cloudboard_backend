@@ -17,7 +17,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
           process.env.NODE_ENV === 'test' ||
           process.env.NODE_ENV === 'development'
             ? `${__dirname + '/**/*.entity.ts'}`
-            : 'dist/entity/**/*.js',
+            : 'dist/**/*.entity.js',
         ],
         synchronize:
           process.env.NODE_ENV === 'test' ||
