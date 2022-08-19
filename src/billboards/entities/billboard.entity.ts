@@ -12,6 +12,7 @@ import {
   UpdateDateColumn,
   Index,
 } from 'typeorm';
+import { billboardStatusEnum } from '../enums/billboardStatus.enum';
 
 @Entity()
 export class Billboard {
@@ -57,7 +58,7 @@ export class Billboard {
   address: string;
 
   @ManyToOne(() => User, (user) => user.billboards, { onDelete: 'CASCADE' })
-  like: User;
+  likes: User;
 
   @Column()
   duration: string;
@@ -66,7 +67,7 @@ export class Billboard {
   price: string;
 
   @Column({ default: 0 })
-  view: number;
+  views: number;
 
   @Column({ name: 'image_url' })
   imageUrl: string;
@@ -74,8 +75,12 @@ export class Billboard {
   @Column({ name: 'video_url' })
   videoUrl: string;
 
-  @Column({ name: 'is_active', default: false })
-  isActive: boolean;
+  @Column({
+    type: 'enum',
+    enum: billboardStatusEnum,
+    default: billboardStatusEnum.pending,
+  })
+  status: billboardStatusEnum;
 
   @Column({ name: 'approved_by', default: null })
   approvedBy: string;

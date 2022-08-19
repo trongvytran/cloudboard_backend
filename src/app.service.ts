@@ -23,7 +23,6 @@ export class AppService implements OnApplicationBootstrap {
       process.env.NODE_ENV === 'test' ||
       process.env.NODE_ENV === 'development'
     ) {
-      await this.roleSeeder.run();
       await this.userSeeder.run();
       await this.citySeeder.run();
       await this.districtSeeder.run();
@@ -31,5 +30,6 @@ export class AppService implements OnApplicationBootstrap {
       await this.subscriptionSeeder.run();
       await this.billboardSeeder.run();
     }
+    await this.roleSeeder.run();
   }
 }
