@@ -6,7 +6,7 @@ import { User } from '../../users/entities/user.entity';
 import { Subscription } from '../../subscriptions/entities/subscription.entity';
 import { District } from '../../districts/entities/district.entity';
 import { City } from '../../cities/entities/city.entity';
-
+import { faker } from '@faker-js/faker';
 @Injectable()
 export class BillboardSeeder {
   constructor(
@@ -36,14 +36,13 @@ export class BillboardSeeder {
       billboardData.push({
         lat: 10.780654236388157,
         long: 106.69928199981912,
-        name: 'Vy Tran',
-        description:
-          'Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ',
-        height: 14,
-        width: 48,
-        address: '123 Le Duan St.',
+        name: faker.commerce.productName(),
+        description: faker.lorem.paragraphs(),
+        height: faker.datatype.number({ min: 30, max: 60 }),
+        width: faker.datatype.number({ min: 30, max: 60 }),
+        address: faker.address.streetAddress(),
         price: '115,000,000₫ - 160,000,000₫',
-        imageUrl: 'https://picsum.photos/id/11/200/300',
+        imageUrl: faker.image.abstract(640, 480, true),
         videoUrl:
           'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley',
         duration: `${duration[durationRandom]} months`,
