@@ -4,14 +4,19 @@ import { Repository } from 'typeorm';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
 import { Transaction } from './entities/transaction.entity';
-
+import Stripe from 'stripe';
 @Injectable()
 export class TransactionsService {
+  private stripe: Stripe;
   constructor(
     @InjectRepository(Transaction)
     private transactionRepository: Repository<Transaction>,
-  ) {}
-
+  )  {
+    this.stripe = new Stripe(process.env.API_SECRET_KEY, {
+      apiVersion: '2022-08-01',
+    });
+  }
+  
   create(createTransactionDto: CreateTransactionDto) {
     return this.transactionRepository.save(createTransactionDto);
   }

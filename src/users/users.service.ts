@@ -4,15 +4,23 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-
+import StripeService from '../stripe/stripe.service';
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
+    private stripeService: StripeService
   ) {}
 
-  create(createUserDto: CreateUserDto) {
-    return this.userRepository.save(createUserDto);
+  async create(createUserDto: CreateUserDto) {
+    const stripeCustomer = await this.stripeService.createCustomer(createUserDto.name, createUserDto.email);
+ 
+    const newUser = await this.userRepository.create({
+      ...createUserDto,
+      stripeCustomerId: stripeCustomer.id
+    });
+    await this.userRepository.save(newUser);
+    return newUser;
   }
 
   findAll(): Promise<User[]> {

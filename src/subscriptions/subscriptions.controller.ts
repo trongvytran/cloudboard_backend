@@ -6,12 +6,13 @@ import {
   Patch,
   Param,
   Delete,
+  Req,
 } from '@nestjs/common';
 import { SubscriptionsService } from './subscriptions.service';
 import { CreateSubscriptionDto } from './dto/create-subscription.dto';
 import { UpdateSubscriptionDto } from './dto/update-subscription.dto';
 import { ApiTags } from '@nestjs/swagger';
-
+import { User } from '../users/entities/user.entity';
 @Controller('subscriptions')
 @ApiTags('subscriptions')
 export class SubscriptionsController {
@@ -43,5 +44,15 @@ export class SubscriptionsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.subscriptionsService.remove(+id);
+  }
+
+  @Post('monthly')
+  async createSubscription(@Req() request: User) {
+    return this.subscriptionsService.createSubscription(request.stripeCustomerId);
+  }
+ 
+  @Get('monthly')
+  async getSubscription(@Req() request: User) {
+    return this.subscriptionsService.getSubscription(request.stripeCustomerId);
   }
 }

@@ -19,6 +19,9 @@ export class User {
   @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
+  
+  @Column({default: ''})
+  stripeCustomerId: string;
 
   @ApiProperty()
   @Column()
@@ -54,4 +57,8 @@ export class User {
 
   @ManyToOne(() => Role, (role) => role.users)
   role: Role;
+  
+  
+
+
 }
