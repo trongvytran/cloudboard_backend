@@ -34,25 +34,26 @@ export class SubscriptionsService {
     return this.subscriptionRepository.delete(id);
   }
 
-  public async createSubscription(customerId: string) {
+  public async createSubscription(stripeCustomerId: string) {
     const priceId = process.env.SUBSCRIPTION_PRICE_ID;
- 
-    const subscriptions = await this.stripeService.listSubscriptions(priceId, customerId);
+    const customerId = "cus_MLom7df9sRBBTG"
+    
+    const subscriptions = await this.stripeService.listSubscriptions(priceId, stripeCustomerId);
     if (subscriptions.data.length) {
       throw new BadRequestException('Customer already subscribed');
     }
-    return this.stripeService.createSubscription(priceId, customerId);
+    return this.stripeService.createSubscription(priceId, stripeCustomerId);
   }
  
-  public async getSubscription(customerId: string) {
-    const priceId = process.env.SUBSCRIPTION_PRICE_ID;
-    const subscriptions = await this.stripeService.listSubscriptions(priceId, customerId);
- 
+  public async getSubscription(stripeCustomerId: string)
+   {
+    const subscriptions = await this.stripeService.listAllSubscriptions(stripeCustomerId);
     if (!subscriptions.data.length) {
       return new NotFoundException('Customer not subscribed');
     }
-    return subscriptions.data[0];
+    return subscriptions;
   }
+
 }
 
 

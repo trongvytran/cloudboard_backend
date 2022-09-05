@@ -19,6 +19,7 @@ export class AuthService {
 
   generateJwtToken(user: {
     id: any;
+    stripeCustomerId:string,
     name: string;
     email: string;
     imageUrl: string;
@@ -27,6 +28,7 @@ export class AuthService {
   }) {
     const payload = {
       id: user.id,
+      stripeCustomerId: user.stripeCustomerId,
       name: user.name,
       email: user.email,
       imageUrl: user.imageUrl,
@@ -49,6 +51,7 @@ export class AuthService {
     }
     const role = await this.rolesService.findOneByName('User');
     const registerInfo = {
+      stripeCustomerId: res.data.stripeCustomerId,
       name: res.data.name,
       email: res.data.email,
       imageUrl: res.data.picture,
@@ -72,11 +75,13 @@ export class AuthService {
     }
     const role = await this.rolesService.findOneByName('User');
     const registerInfo = {
+      stripeCustomerId: res.data.stripeCustomerId,
       name: res.data.name,
       email: res.data.email,
       imageUrl: res.data.picture.data.url,
       phoneNumber: '',
       role,
+      
     };
     const newUser = await this.usersService.create(registerInfo);
     return this.generateJwtToken(newUser);

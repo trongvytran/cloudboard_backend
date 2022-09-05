@@ -20,9 +20,10 @@ export default class StripeService {
       email
     });
   }
-  public async attachCreditCard(paymentMethodId: string, customerId: string) {
+  public async attachCreditCard(paymentMethodId: string, stripeCustomerId: string) {
     return this.stripe.setupIntents.create({
-      customer: customerId,
+      confirm:true,
+      customer: stripeCustomerId,
       payment_method: paymentMethodId,
     })
   }
@@ -44,9 +45,9 @@ export default class StripeService {
     })
   }
 
-  public async setDefaultCreditCard(paymentMethodId: string, customerId: string) {
+  public async setDefaultCreditCard(paymentMethodId: string, stripeCustomerId: string) {
     try {
-      return await this.stripe.customers.update(customerId, {
+      return await this.stripe.customers.update(stripeCustomerId, {
         invoice_settings: {
           default_payment_method: paymentMethodId
         }
@@ -78,10 +79,26 @@ export default class StripeService {
   }
  
   public async listSubscriptions(priceId: string, customerId: string,) {
-    return this.stripe.subscriptions.list({
+    return await this.stripe.subscriptions.list({
       customer: customerId,
       price: priceId,
-      expand: ['data.latest_invoice', 'data.latest_invoice.payment_intent']
+  
     })
   }
+  public async listAllSubscriptions( customerId: string,) {
+    return await this.stripe.subscriptions.list({
+      customer: customerId,
+      status: "all"
+  
+    })
+  }
+
+  public async customerPortal(customerId: string,) {
+    const portalSession = await this.stripe.billingPortal.sessions.create({
+      customer: customerId,
+ 
+    });
+  
+    return portalSession
+  };
 }
