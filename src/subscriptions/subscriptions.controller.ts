@@ -12,12 +12,7 @@ import { SubscriptionsService } from './subscriptions.service';
 import { CreateSubscriptionDto } from './dto/create-subscription.dto';
 import { UpdateSubscriptionDto } from './dto/update-subscription.dto';
 import { ApiTags } from '@nestjs/swagger';
-import RequestWithUser from '../users/requestWithUser.interface';
 import { User } from '../users/entities/user.entity';
-import * as rawbody from 'raw-body';
-import { Injectable, Scope, Inject } from '@nestjs/common';
-import { REQUEST } from '@nestjs/core';
-import { Request } from 'express';
 @Controller('subscriptions')
 @ApiTags('subscriptions')
 export class SubscriptionsController {

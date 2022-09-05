@@ -19,7 +19,7 @@ import { User } from '../users/entities/user.entity';
 import StripeService from '../stripe/stripe.service';
 import AddCreditCardDto from '../stripe/creditCards.dto';
 import SetDefaultCreditCardDto from '../stripe/setDefaultCreditCard.dto';
-import RequestWithUser from '../users/requestWithUser.interface';
+
 @Controller('transactions')
 @ApiTags('transactions')
 export class TransactionsController {
@@ -33,8 +33,8 @@ export class TransactionsController {
     return this.transactionsService.create(createTransactionDto);
   }
   @Post('/charge')
-  async createCharge(@Body() charge: CreateChargeDto, @Req() request: RequestWithUser ) {
-    return this.stripeService.charge(charge.amount, charge.paymentMethodId, request.user.stripeCustomerId);
+  async createCharge(@Body() charge: CreateChargeDto,@Body() user: User ) {
+    return this.stripeService.charge(charge.amount, charge.paymentMethodId, user.stripeCustomerId);
   }
 
   @Post('/credit-cards')
