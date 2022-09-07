@@ -1,4 +1,8 @@
-import { BadRequestException , Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateSubscriptionDto } from './dto/create-subscription.dto';
@@ -36,24 +40,23 @@ export class SubscriptionsService {
 
   public async createSubscription(stripeCustomerId: string) {
     const priceId = process.env.SUBSCRIPTION_PRICE_ID;
-    const customerId = "cus_MLom7df9sRBBTG"
-    
-    const subscriptions = await this.stripeService.listSubscriptions(priceId, stripeCustomerId);
+    const subscriptions = await this.stripeService.listSubscriptions(
+      priceId,
+      stripeCustomerId,
+    );
     if (subscriptions.data.length) {
       throw new BadRequestException('Customer already subscribed');
     }
     return this.stripeService.createSubscription(priceId, stripeCustomerId);
   }
- 
-  public async getSubscription(stripeCustomerId: string)
-   {
-    const subscriptions = await this.stripeService.listAllSubscriptions(stripeCustomerId);
+
+  public async getSubscription(stripeCustomerId: string) {
+    const subscriptions = await this.stripeService.listAllSubscriptions(
+      stripeCustomerId,
+    );
     if (!subscriptions.data.length) {
       return new NotFoundException('Customer not subscribed');
     }
     return subscriptions;
   }
-
 }
-
-

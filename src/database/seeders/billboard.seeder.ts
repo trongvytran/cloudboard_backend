@@ -42,7 +42,7 @@ export class BillboardSeeder {
         width: faker.datatype.number({ min: 30, max: 60 }),
         address: faker.address.streetAddress(),
         price: '115,000,000₫ - 160,000,000₫',
-        imageUrl: faker.image.abstract(640, 480, true),
+        imageUrl: faker.image.city(640, 480, true),
         videoUrl:
           'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley',
         duration: `${duration[durationRandom]} months`,
