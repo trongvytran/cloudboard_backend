@@ -25,7 +25,7 @@ import SetDefaultCreditCardDto from '../stripe/setDefaultCreditCard.dto';
 export class TransactionsController {
   constructor(private readonly transactionsService: TransactionsService,
     private readonly stripeService: StripeService
-    
+
     ) {}
 
   @Post()
@@ -39,20 +39,16 @@ export class TransactionsController {
 
   @Post('/credit-cards')
   async addCreditCard(@Body() user: User, @Body() creditCard: AddCreditCardDto) {
-//   console.log(creditCard.paymentMethodId)
-//   console.log(user.stripeCustomerId)
     return this.stripeService.attachCreditCard( creditCard.paymentMethodId,user.stripeCustomerId);
   }
   @Post('default')
   async setDefaultCard(@Body() user: User, @Body() creditCard: SetDefaultCreditCardDto) {
-//     console.log(creditCard.paymentMethodId)
-//     console.log(user.stripeCustomerId)
     await this.stripeService.setDefaultCreditCard(creditCard.paymentMethodId, user.stripeCustomerId);
   }
 
-  @Get('/credit-cards')
-  async getCreditCards(@Body() user: User) {
-    return this.stripeService.listCreditCards(user.stripeCustomerId);
+  @Get('/credit-cards/:stripeCustomerId')
+  async getCreditCards(@Param('stripeCustomerId') stripeCustomerId: string) {
+    return this.stripeService.listCreditCards(stripeCustomerId);
   }
 
   @Post('/portal')
@@ -77,7 +73,7 @@ export class TransactionsController {
   ) {
     return this.transactionsService.update(+id, updateTransactionDto);
   }
-  
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.transactionsService.remove(+id);
