@@ -1,4 +1,4 @@
 export enum subscriptionNameEnum {
-  basic = 'basic',
-  pro = 'pro',
+  plus = 'plus',
+  premium = 'premium',
 }

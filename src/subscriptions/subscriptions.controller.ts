@@ -16,11 +16,12 @@ import { User } from '../users/entities/user.entity';
 @Controller('subscriptions')
 @ApiTags('subscriptions')
 export class SubscriptionsController {
-  constructor(private readonly subscriptionsService: SubscriptionsService,
-    private readonly user: User
-    ) {}
+  constructor(
+    private readonly subscriptionsService: SubscriptionsService,
+    private readonly user: User,
+  ) {}
 
-  @Post()
+  @Post('/subscribe')
   create(@Body() createSubscriptionDto: CreateSubscriptionDto) {
     return this.subscriptionsService.create(createSubscriptionDto);
   }
@@ -48,14 +49,8 @@ export class SubscriptionsController {
     return this.subscriptionsService.remove(+id);
   }
 
-  @Post('subscribe')
-  async createSubscription( @Body() user: User) {
-    return this.subscriptionsService.createSubscription(user.stripeCustomerId);
-  }
- 
   @Get('get-sub/:stripeCustomerId')
   async getSubscription1(@Param('stripeCustomerId') stripeCustomerId: string) {
     return this.subscriptionsService.getSubscription(stripeCustomerId);
   }
-
 }

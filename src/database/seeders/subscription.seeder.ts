@@ -22,7 +22,7 @@ export class SubscriptionSeeder {
     if (subscription.length === 0) {
       await this.subscriptionRepository.insert([
         {
-          name: subscriptionNameEnum.basic,
+          name: subscriptionNameEnum.plus,
           periodStart: new Date(),
           periodEnd: new Date(date.setMonth(date.getMonth() + 8)),
           status: subscriptionStatusEnum.active,

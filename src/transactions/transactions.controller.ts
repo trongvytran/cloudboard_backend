@@ -23,27 +23,43 @@ import SetDefaultCreditCardDto from '../stripe/setDefaultCreditCard.dto';
 @Controller('transactions')
 @ApiTags('transactions')
 export class TransactionsController {
-  constructor(private readonly transactionsService: TransactionsService,
-    private readonly stripeService: StripeService
-
-    ) {}
+  constructor(
+    private readonly transactionsService: TransactionsService,
+    private readonly stripeService: StripeService,
+  ) {}
 
   @Post()
   create(@Body() createTransactionDto: CreateTransactionDto) {
     return this.transactionsService.create(createTransactionDto);
   }
   @Post('/charge')
-  async createCharge(@Body() charge: CreateChargeDto,@Body() user: User ) {
-    return this.stripeService.charge(charge.amount, charge.paymentMethodId, user.stripeCustomerId);
+  async createCharge(@Body() charge: CreateChargeDto, @Body() user: User) {
+    return this.stripeService.charge(
+      charge.amount,
+      charge.paymentMethodId,
+      user.stripeCustomerId,
+    );
   }
 
   @Post('/credit-cards')
-  async addCreditCard(@Body() user: User, @Body() creditCard: AddCreditCardDto) {
-    return this.stripeService.attachCreditCard( creditCard.paymentMethodId,user.stripeCustomerId);
+  async addCreditCard(
+    @Body() user: User,
+    @Body() creditCard: AddCreditCardDto,
+  ) {
+    return this.stripeService.attachCreditCard(
+      creditCard.paymentMethodId,
+      user.stripeCustomerId,
+    );
   }
   @Post('default')
-  async setDefaultCard(@Body() user: User, @Body() creditCard: SetDefaultCreditCardDto) {
-    await this.stripeService.setDefaultCreditCard(creditCard.paymentMethodId, user.stripeCustomerId);
+  async setDefaultCard(
+    @Body() user: User,
+    @Body() creditCard: SetDefaultCreditCardDto,
+  ) {
+    await this.stripeService.setDefaultCreditCard(
+      creditCard.paymentMethodId,
+      user.stripeCustomerId,
+    );
   }
 
   @Get('/credit-cards/:stripeCustomerId')
@@ -52,8 +68,8 @@ export class TransactionsController {
   }
 
   @Post('/portal')
-  async customerPortal(@Body() user: User ) {
-    return this.stripeService.customerPortal( user.stripeCustomerId);
+  async customerPortal(@Body() user: User) {
+    return this.stripeService.customerPortal(user.stripeCustomerId);
   }
 
   @Get()
