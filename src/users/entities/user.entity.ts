@@ -10,6 +10,7 @@ import {
   UpdateDateColumn,
   ManyToOne,
   Unique,
+  OneToOne,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -19,8 +20,8 @@ export class User {
   @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
-  
-  @Column({default: ''})
+
+  @Column({ default: '' })
   stripeCustomerId: string;
 
   @ApiProperty()
@@ -52,13 +53,12 @@ export class User {
   @OneToMany(() => Billboard, (billboard) => billboard.user)
   billboards: Billboard[];
 
-  @OneToMany(() => Subscription, (subscription) => subscription.user)
-  subscriptions: Subscription[];
+  @OneToMany(() => Billboard, (billboard) => billboard.user)
+  bookedBillboards: Billboard[];
+
+  @OneToOne(() => Subscription, (subscription) => subscription.user)
+  subscription: Subscription;
 
   @ManyToOne(() => Role, (role) => role.users)
   role: Role;
-  
-  
-
-
 }

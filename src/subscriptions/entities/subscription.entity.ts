@@ -5,7 +5,7 @@ import {
   Column,
   PrimaryGeneratedColumn,
   OneToMany,
-  ManyToOne,
+  OneToOne,
 } from 'typeorm';
 import { subscriptionStatusEnum } from '../enums/subscriptionStatus.enum';
 import { subscriptionNameEnum } from '../enums/subscriptionName.enum';
@@ -15,7 +15,7 @@ export class Subscription {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => User, (user) => user.subscriptions, { onDelete: 'CASCADE' })
+  @OneToOne(() => User, (user) => user.subscription, { onDelete: 'CASCADE' })
   user: User;
 
   @Column()
