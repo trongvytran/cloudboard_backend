@@ -9,15 +9,18 @@ import StripeService from '../stripe/stripe.service';
 export class UsersService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
-    private stripeService: StripeService
+    private stripeService: StripeService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const stripeCustomer = await this.stripeService.createCustomer(createUserDto.name, createUserDto.email);
- 
+    const stripeCustomer = await this.stripeService.createCustomer(
+      createUserDto.name,
+      createUserDto.email,
+    );
+
     const newUser = await this.userRepository.create({
       ...createUserDto,
-      stripeCustomerId: stripeCustomer.id
+      stripeCustomerId: stripeCustomer.id,
     });
     await this.userRepository.save(newUser);
     return newUser;
@@ -25,21 +28,21 @@ export class UsersService {
 
   findAll(): Promise<User[]> {
     return this.userRepository.find({
-      relations: ['role', 'billboards', 'subscriptions'],
+      relations: ['role', 'billboards', 'subscription'],
     });
   }
 
   findOne(id: number): Promise<User | undefined> {
     return this.userRepository.findOne({
       where: { id },
-      relations: ['role', 'billboards', 'subscriptions'],
+      relations: ['role', 'billboards', 'subscription'],
     });
   }
 
   findOneByEmail(email: string): Promise<User> {
     return this.userRepository.findOne({
       where: { email },
-      relations: ['role', 'billboards', 'subscriptions'],
+      relations: ['role', 'billboards', 'subscription'],
     });
   }
 

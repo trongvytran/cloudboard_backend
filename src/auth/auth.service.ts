@@ -7,6 +7,7 @@ import { lastValueFrom } from 'rxjs';
 import { FacebookTokenDto } from './dto/facebook-token.dto';
 import { JwtService } from '@nestjs/jwt';
 import { Role } from '../roles/entities/role.entity';
+import { Subscription } from '../subscriptions/entities/subscription.entity';
 
 @Injectable()
 export class AuthService {
@@ -19,12 +20,13 @@ export class AuthService {
 
   generateJwtToken(user: {
     id: any;
-    stripeCustomerId:string,
+    stripeCustomerId: string;
     name: string;
     email: string;
     imageUrl: string;
     phoneNumber: string;
     role: Role;
+    subscription: Subscription;
   }) {
     const payload = {
       id: user.id,
@@ -34,6 +36,7 @@ export class AuthService {
       imageUrl: user.imageUrl,
       phoneNumber: user.phoneNumber,
       role: user.role.name,
+      subscription: user.subscription,
     };
     return { token: this.jwtService.sign(payload), user: payload };
   }
@@ -81,7 +84,6 @@ export class AuthService {
       imageUrl: res.data.picture.data.url,
       phoneNumber: '',
       role,
-      
     };
     const newUser = await this.usersService.create(registerInfo);
     return this.generateJwtToken(newUser);

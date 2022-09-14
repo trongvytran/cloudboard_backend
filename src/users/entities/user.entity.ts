@@ -11,6 +11,7 @@ import {
   ManyToOne,
   Unique,
   OneToOne,
+  JoinColumn,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -57,6 +58,7 @@ export class User {
   bookedBillboards: Billboard[];
 
   @OneToOne(() => Subscription, (subscription) => subscription.user)
+  @JoinColumn()
   subscription: Subscription;
 
   @ManyToOne(() => Role, (role) => role.users)
