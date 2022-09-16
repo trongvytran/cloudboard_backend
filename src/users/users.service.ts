@@ -5,10 +5,13 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import StripeService from '../stripe/stripe.service';
+import { Billboard } from '../billboards/entities/billboard.entity';
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
+    @InjectRepository(Billboard)
+    private billboardsRepository: Repository<Billboard>,
     private stripeService: StripeService,
   ) {}
 
@@ -28,21 +31,21 @@ export class UsersService {
 
   findAll(): Promise<User[]> {
     return this.userRepository.find({
-      relations: ['role', 'billboards', 'subscription'],
+      relations: ['role', 'billboards', 'subscription', 'bookedBillboards'],
     });
   }
 
   findOne(id: number): Promise<User | undefined> {
     return this.userRepository.findOne({
       where: { id },
-      relations: ['role', 'billboards', 'subscription'],
+      relations: ['role', 'billboards', 'subscription', 'bookedBillboards'],
     });
   }
 
   findOneByEmail(email: string): Promise<User> {
     return this.userRepository.findOne({
       where: { email },
-      relations: ['role', 'billboards', 'subscription'],
+      relations: ['role', 'billboards', 'subscription', 'bookedBillboards'],
     });
   }
 
@@ -52,5 +55,18 @@ export class UsersService {
 
   remove(id: number) {
     return this.userRepository.delete(id);
+  }
+
+  async bookBillboard(id: number, item: any) {
+    const user = await this.userRepository.findOne({
+      where: { id },
+      relations: ['role', 'billboards', 'subscription', 'bookedBillboards'],
+    });
+    const billboard = await this.billboardsRepository.findOne({
+      where: { id: item.billboardId },
+      relations: ['district', 'city', 'ward', 'subscription', 'user'],
+    });
+    user.bookedBillboards.push(billboard);
+    return this.userRepository.save(user);
   }
 }

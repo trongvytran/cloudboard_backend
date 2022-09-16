@@ -15,5 +15,4 @@ export class CreateUserDto {
   imageUrl: string;
 
   role: Role;
-  
 }
